@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Notenplans</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @notenplans.each do |notenplan| %>
+      <tr>
+        <td><%= notenplan.name %></td>
+        <td><%= notenplan.description %></td>
+        <td><%= link_to 'Show', notenplan %></td>
+        <td><%= link_to 'Edit', edit_notenplan_path(notenplan) %></td>
+        <td><%= link_to 'Destroy', notenplan, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Notenplan', new_notenplan_path %>
