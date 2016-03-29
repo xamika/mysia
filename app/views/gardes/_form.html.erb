@@ -1,0 +1,37 @@
+<%= form_for(@garde) do |f| %>
+  <% if @garde.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@garde.errors.count, "error") %> prohibited this garde from being saved:</h2>
+
+      <ul>
+      <% @garde.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :notenplan_id %><br>
+    <%= f.text_field :notenplan_id %>
+  </div>
+  <div class="field">
+    <%= f.label :subject_id %><br>
+    <%= f.text_field :subject_id %>
+  </div>
+  <div class="field">
+    <%= f.label :garde %><br>
+    <%= f.text_field :garde %>
+  </div>
+  <div class="field">
+    <%= f.label :weighting %><br>
+    <%= f.text_field :weighting %>
+  </div>
+  <div class="field">
+    <%= f.label :shorttest %><br>
+    <%= f.check_box :shorttest %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
