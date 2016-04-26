@@ -28,7 +28,7 @@ class MarksController < ApplicationController
 
     respond_to do |format|
       if @mark.save
-        format.html { redirect_to @mark, notice: 'Mark was successfully created.' }
+        format.html { redirect_to @mark, notice: 'Note erfolgreich erstellt.' }
         format.json { render :show, status: :created, location: @mark }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class MarksController < ApplicationController
   def update
     respond_to do |format|
       if @mark.update(mark_params)
-        format.html { redirect_to @mark, notice: 'Mark was successfully updated.' }
+        format.html { redirect_to @mark, notice: 'Note erfolgreich geändert.' }
         format.json { render :show, status: :ok, location: @mark }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class MarksController < ApplicationController
   def destroy
     @mark.destroy
     respond_to do |format|
-      format.html { redirect_to marks_url, notice: 'Mark was successfully destroyed.' }
+      format.html { redirect_to marks_url, notice: 'Note erfolgreich gelöscht.' }
       format.json { head :no_content }
     end
   end

@@ -22,9 +22,9 @@
         <td><%= mark.shorttest %></td>
         <td><%= mark.notenplan %></td>
         <td><%= mark.subject %></td>
-        <td><%= link_to 'Show', mark %></td>
-        <td><%= link_to 'Edit', edit_mark_path(mark) %></td>
-        <td><%= link_to 'Destroy', mark, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Anzeigen', mark %></td>
+        <td><%= link_to 'Bearbeiten', edit_mark_path(mark) %></td>
+        <td><%= link_to 'Löschen', mark, method: :delete, data: { confirm: 'Sind sie sicher?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -32,4 +32,4 @@
 
 <br>
 
-<%= link_to 'New Mark', new_mark_path %>
+<%= link_to 'Neue Note', new_mark_path %>
