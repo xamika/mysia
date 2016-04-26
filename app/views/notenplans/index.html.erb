@@ -16,7 +16,7 @@
         <td><%= notenplan.description %></td>
         <td><%= link_to 'Anzeigen', notenplan, class: 'btn btn-default' %></td>
         <td><%= link_to 'Bearbeiten', edit_notenplan_path(notenplan), class: 'btn btn-primary' %></td>
-        <td><%= link_to 'Löschen', notenplan, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+        <td><%= link_to 'Löschen', notenplan, method: :delete, data: { confirm: 'Sind sie sicher?' }, class: 'btn btn-danger' %>
         </td>
       </tr>
     <% end %>
