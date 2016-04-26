@@ -1,0 +1,37 @@
+<%= form_for(@mark) do |f| %>
+  <% if @mark.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@mark.errors.count, "error") %> prohibited this mark from being saved:</h2>
+
+      <ul>
+      <% @mark.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :mark %><br>
+    <%= f.text_field :mark %>
+  </div>
+  <div class="field">
+    <%= f.label :weighting %><br>
+    <%= f.text_field :weighting %>
+  </div>
+  <div class="field">
+    <%= f.label :shorttest %><br>
+    <%= f.check_box :shorttest %>
+  </div>
+  <div class="field">
+    <%= f.label :notenplan_id %><br>
+    <%= f.text_field :notenplan_id %>
+  </div>
+  <div class="field">
+    <%= f.label :subject_id %><br>
+    <%= f.text_field :subject_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

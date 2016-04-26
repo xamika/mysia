@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :gardes
+  resources :marks
   resources :subjects
   resources :notenplans
   devise_for :users do
