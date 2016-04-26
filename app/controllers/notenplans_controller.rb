@@ -29,7 +29,7 @@ class NotenplansController < ApplicationController
 
     respond_to do |format|
       if @notenplan.save
-        format.html { redirect_to @notenplan, notice: 'Notenplan was successfully created.' }
+        format.html { redirect_to @notenplan, notice: 'Notenplan wurde erfolgreich erstellt.' }
         format.json { render :show, status: :created, location: @notenplan }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class NotenplansController < ApplicationController
   def update
     respond_to do |format|
       if @notenplan.update(notenplan_params)
-        format.html { redirect_to @notenplan, notice: 'Notenplan was successfully updated.' }
+        format.html { redirect_to @notenplan, notice: 'Notenplan wurde erfolgreich geändert.' }
         format.json { render :show, status: :ok, location: @notenplan }
       else
         format.html { render :edit }
@@ -57,7 +57,7 @@ class NotenplansController < ApplicationController
   def destroy
     @notenplan.destroy
     respond_to do |format|
-      format.html { redirect_to notenplans_url, notice: 'Notenplan was successfully destroyed.' }
+      format.html { redirect_to notenplans_url, notice: 'Notenplan wurde erfolgreich gelöscht.' }
       format.json { head :no_content }
     end
   end
