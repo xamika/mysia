@@ -1,4 +1,4 @@
-class Garde < ActiveRecord::Base
+class Mark < ActiveRecord::Base
   belongs_to :notenplan
   belongs_to :subject
 end
