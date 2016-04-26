@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Notenplan:</strong>
+  <%= @garde.notenplan %>
+</p>
+
+<p>
+  <strong>Subject:</strong>
+  <%= @garde.subject %>
+</p>
+
+<p>
+  <strong>Garde:</strong>
+  <%= @garde.garde %>
+</p>
+
+<p>
+  <strong>Weighting:</strong>
+  <%= @garde.weighting %>
+</p>
+
+<p>
+  <strong>Shorttest:</strong>
+  <%= @garde.shorttest %>
+</p>
+
+<%= link_to 'Edit', edit_garde_path(@garde) %> |
+<%= link_to 'Back', gardes_path %>
