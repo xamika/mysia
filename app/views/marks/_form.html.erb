@@ -11,25 +11,25 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :mark %><br>
-    <%= f.text_field :mark %>
+    <%= f.text_field :mark, class: 'form-control' %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :weighting %><br>
-    <%= f.text_field :weighting %>
+    <%= f.text_field :weighting, class: 'form-control' %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :shorttest %><br>
-    <%= f.check_box :shorttest %>
+    <%= f.check_box :shorttest, class: 'form-control' %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :notenplan_id %><br>
-    <%= f.text_field :notenplan_id %>
+    <%= f.text_field :notenplan_id, class: 'form-control' %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :subject_id %><br>
-    <%= f.text_field :subject_id %>
+    <%= f.text_field :subject_id, class: 'form-control' %>
   </div>
   <div class="actions">
     <%= f.submit %>
