@@ -29,7 +29,7 @@ class NotenplansController < ApplicationController
 
     respond_to do |format|
       if @notenplan.save
-        format.html { redirect_to @notenplan, notice: 'Notenplan wurde erfolgreich erstellt.' }
+        format.html { redirect_to new_subject_path, notice: 'Notenplan wurde erfolgreich erstellt.', notenplan: @notenplan }
         format.json { render :show, status: :created, location: @notenplan }
       else
         format.html { render :new }
