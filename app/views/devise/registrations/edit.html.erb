@@ -1,5 +1,5 @@
 <div class="authform">
-  <h3>Edit <%= resource_name.to_s.humanize %></h3>
+  <h3>Konto bearbeiten</h3>
   <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :role => 'form'}) do |f| %>
     <%= devise_error_messages! %>
     <div class="form-group">
@@ -14,7 +14,7 @@
       <% end %>
     </div>
     <fieldset>
-      <p>Leave these fields blank if you don't want to change your password.</p>
+      <p>Lass diese Felder leer, wenn du dein Passwort nicht wechseln möchtest.</p>
       <div class="form-group">
         <%= f.label :password %>
         <%= f.password_field :password, :autocomplete => 'off', class: 'form-control' %>
@@ -25,7 +25,7 @@
       </div>
     </fieldset>
     <fieldset>
-      <p>You must enter your current password to make changes.</p>
+      <p>Hier musst du dein aktuelles Passwort eintragen.</p>
       <div class="form-group">
         <%= f.label :current_password %>
         <%= f.password_field :current_password, class: 'form-control' %>
@@ -35,7 +35,7 @@
   <% end %>
 </div>
 <div class="authform">
-<h3>Cancel Account</h3>
-<p>Unhappy? We'll be sad to see you go.</p>
-<%= button_to "Account löschen", registration_path(resource_name), :data => { :confirm => "Sind sie sicher?" }, :method => :delete, :class => 'button right' %>
+<h3>Konto löschen</h3>
+<p>Wir würden traurig sein, wenn du gehst.</p>
+<%= button_to "Konto löschen", registration_path(resource_name), :data => { :confirm => "Sind sie sicher?" }, :method => :delete, :class => 'button center' %>
 </div>
