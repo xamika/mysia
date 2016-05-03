@@ -11,6 +11,11 @@ class NotenplansController < ApplicationController
   # GET /notenplans/1
   # GET /notenplans/1.json
   def show
+    @subjects = []
+    special_marks = @notenplan.marks.where(mark: nil)
+    special_marks.each do |special_mark|
+        @subjects << {subject: special_mark.subject, marks:  @notenplan.marks.where(subject_id: special_mark.subject.id)}
+    end
   end
 
   # GET /notenplans/new
@@ -29,7 +34,7 @@ class NotenplansController < ApplicationController
 
     respond_to do |format|
       if @notenplan.save
-        format.html { redirect_to new_subject_path, notice: 'Notenplan wurde erfolgreich erstellt.', notenplan: @notenplan }
+        format.html { redirect_to new_subject_path(notenplan: @notenplan), notice: 'Notenplan wurde erfolgreich erstellt.' }
         format.json { render :show, status: :created, location: @notenplan }
       else
         format.html { render :new }
