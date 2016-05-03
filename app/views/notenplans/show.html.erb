@@ -1,4 +1,11 @@
-<p id="notice"><%= notice %></p>
+<% @subjects.each do |subject| %>
+
+  <p>Name: <%= subject[:subject].name %></p>
+  <% subject[:marks].each do |mark| %>
+    <%= mark.mark %>
+  <% end %>
+  <%= link_to 'Neue Note', new_mark_path(notenplan_id: @notenplan.id, subject_id: subject[:subject].id) %>
+<% end %>
 
 <p>
   <strong>Name:</strong>

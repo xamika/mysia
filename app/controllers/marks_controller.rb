@@ -15,6 +15,8 @@ class MarksController < ApplicationController
   # GET /marks/new
   def new
     @mark = Mark.new
+    @notenplan_id = params[:notenplan_id]
+    @subject_id = params[:subject_id]
   end
 
   # GET /marks/1/edit

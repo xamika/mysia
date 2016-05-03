@@ -15,6 +15,7 @@ class SubjectsController < ApplicationController
   # GET /subjects/new
   def new
     @subject = Subject.new
+    session[:notenplan_id] = params[:notenplan]
   end
 
   # GET /subjects/1/edit
@@ -28,6 +29,7 @@ class SubjectsController < ApplicationController
 
     respond_to do |format|
       if @subject.save
+        Mark.create(notenplan_id: session[:notenplan_id], subject: @subject)
         format.html { redirect_to @subject, notice: 'Das Fach wurde erfolgreich erstellt.' }
         format.json { render :show, status: :created, location: @subject }
       else
