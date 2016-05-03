@@ -1,6 +1,6 @@
 <div class="authform">
   <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :role => 'form'}) do |f| %>
-    <h3>Sign in</h3>
+    <h3>Anmelden</h3>
     <%= devise_error_messages! %>
     <div class="form-group">
       <%- if devise_mapping.registerable? %>
@@ -20,7 +20,7 @@
       <% if devise_mapping.rememberable? -%>
         <div class="checkbox" style="width:150px">
           <label>
-            <%= f.check_box :remember_me %> Remember me
+            <%= f.check_box :remember_me %> Erinnere mich
           </label>
         </div>
       <% end -%>
