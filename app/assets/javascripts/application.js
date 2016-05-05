@@ -17,3 +17,10 @@
 //= require select2
 //= require select2_locale_de
 //= require_tree .
+
+$(document).ready(function() {
+  $( ".bootstrap-select2" ).select2({
+      theme: "bootstrap",
+      tags: true
+  });
+});
