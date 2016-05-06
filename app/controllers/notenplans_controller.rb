@@ -5,16 +5,20 @@ class NotenplansController < ApplicationController
   # GET /notenplans
   # GET /notenplans.json
   def index
-    @notenplans = Notenplan.all
+    @notenplans = current_user.notenplans.all
   end
 
   # GET /notenplans/1
   # GET /notenplans/1.json
   def show
-    @subjects = []
-    special_marks = @notenplan.marks.where(mark: nil)
-    special_marks.each do |special_mark|
-        @subjects << {subject: special_mark.subject, marks:  @notenplan.marks.where(subject_id: special_mark.subject.id)}
+    if access_allowed
+      @subjects = []
+      special_marks = @notenplan.marks.where(mark: nil)
+      special_marks.each do |special_mark|
+          @subjects << {subject: special_mark.subject, marks:  @notenplan.marks.where(subject_id: special_mark.subject.id)}
+      end
+    else
+      redirect_to notenplans_path, notice: 'Sie dürfen nicht auf diesen Notenplan zugreifen'  
     end
   end
 
@@ -25,15 +29,18 @@ class NotenplansController < ApplicationController
 
   # GET /notenplans/1/edit
   def edit
+    if (!access_allowed)
+      redirect_to notenplans_path, notice: 'Sie dürfen diesen Notenplan nicht bearbeiten'
+    end
   end
 
   # POST /notenplans
   # POST /notenplans.json
   def create
-    @notenplan = Notenplan.new(notenplan_params)
+    @notenplan = current_user.notenplans.create(notenplan_params)
 
     respond_to do |format|
-      if @notenplan.save
+      if @notenplan.valid?
         format.html { redirect_to new_subject_path(notenplan: @notenplan), notice: 'Notenplan wurde erfolgreich erstellt.' }
         format.json { render :show, status: :created, location: @notenplan }
       else
@@ -65,6 +72,15 @@ class NotenplansController < ApplicationController
       format.html { redirect_to notenplans_url, notice: 'Notenplan wurde erfolgreich gelöscht.' }
       format.json { head :no_content }
     end
+  end
+
+  def access_allowed
+    current_user.notenplans.each do |notenplan|
+        if notenplan == @notenplan
+          return true
+        end
+    end
+    return false
   end
 
   private

@@ -15,6 +15,7 @@ class SubjectsController < ApplicationController
   # GET /subjects/new
   def new
     @subject = Subject.new
+    @subjects = Subject.all
     session[:notenplan_id] = params[:notenplan]
   end
 
@@ -25,18 +26,14 @@ class SubjectsController < ApplicationController
   # POST /subjects
   # POST /subjects.json
   def create
-    @subject = Subject.new(subject_params)
-
-    respond_to do |format|
-      if @subject.save
-        Mark.create(notenplan_id: session[:notenplan_id], subject: @subject)
-        format.html { redirect_to @subject, notice: 'Das Fach wurde erfolgreich erstellt.' }
-        format.json { render :show, status: :created, location: @subject }
-      else
-        format.html { render :new }
-        format.json { render json: @subject.errors, status: :unprocessable_entity }
+    subject_params[:name].each do |subject_name|
+      if (subject_name != "")
+        subject = Subject.find_or_create_by(name: subject_name)
+        Mark.find_or_create_by(notenplan_id: session[:notenplan_id], subject: subject)
       end
     end
+    notenplan = Notenplan.find_by(id: session[:notenplan_id])
+    redirect_to notenplan, notice: 'Das Fach wurde erfolgreich erstellt.'
   end
 
   # PATCH/PUT /subjects/1
@@ -71,6 +68,6 @@ class SubjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def subject_params
-      params.require(:subject).permit(:name, :number)
+      params.require(:subject).permit(:number,:name => [])
     end
 end
