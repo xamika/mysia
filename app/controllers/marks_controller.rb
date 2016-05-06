@@ -30,7 +30,7 @@ class MarksController < ApplicationController
 
     respond_to do |format|
       if @mark.save
-        format.html { redirect_to @mark, notice: 'Note erfolgreich erstellt.' }
+        format.html { redirect_to Notenplan.find_by(id: mark_params[:notenplan_id]), notice: 'Note erfolgreich erstellt.' }
         format.json { render :show, status: :created, location: @mark }
       else
         format.html { render :new }

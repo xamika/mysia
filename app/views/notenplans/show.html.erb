@@ -1,12 +1,3 @@
-<% @subjects.each do |subject| %>
-
-  <p>Name: <%= subject[:subject].name %></p>
-  <% subject[:marks].each do |mark| %>
-    <%= mark.mark %>
-  <% end %>
-  <%= link_to 'Neue Note', new_mark_path(notenplan_id: @notenplan.id, subject_id: subject[:subject].id) %>
-<% end %>
-
 <p>
   <strong>Name:</strong>
   <%= @notenplan.name %>
@@ -16,6 +7,23 @@
   <strong>Beschreibung:</strong>
   <%= @notenplan.description %>
 </p>
+<% @subjects.each do |subject| %>
+
+  <p>Fach: <%= subject[:subject].name %>
+  <% total = 0.0 %>
+  <% counter = 0 %>
+  <% subject[:marks].each do |mark| %>
+    <% if (!mark.mark.nil?) %>
+      <%= mark.mark %>
+      <% total += mark.mark %>
+      <% counter += 1 %>
+    <% end %>
+  <% end %>
+  <% if counter > 0 %>
+    <b>Durchschnitt: </b><%= total / counter %>
+  <% end %>
+  <%= link_to 'Neue Note', new_mark_path(notenplan_id: @notenplan.id, subject_id: subject[:subject].id) %></p>
+<% end %>
 
 <%= link_to 'Bearbeiten', edit_notenplan_path(@notenplan) %> |
 <%= link_to 'Zurück', notenplans_path %>

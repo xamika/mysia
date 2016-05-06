@@ -27,8 +27,10 @@ class SubjectsController < ApplicationController
   # POST /subjects.json
   def create
     subject_params[:name].each do |subject_name|
-      subject = Subject.find_or_create_by(name: subject_name)
-      Mark.find_or_create_by(notenplan_id: session[:notenplan_id], subject: subject)
+      if (subject_name != "")
+        subject = Subject.find_or_create_by(name: subject_name)
+        Mark.find_or_create_by(notenplan_id: session[:notenplan_id], subject: subject)
+      end
     end
     notenplan = Notenplan.find_by(id: session[:notenplan_id])
     redirect_to notenplan, notice: 'Das Fach wurde erfolgreich erstellt.'
