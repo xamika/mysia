@@ -18,7 +18,7 @@ class NotenplansController < ApplicationController
           @subjects << {subject: special_mark.subject, marks:  @notenplan.marks.where(subject_id: special_mark.subject.id)}
       end
     else
-      redirect_to notenplans_path, notice: 'Sie dürfen nicht auf diesen Notenplan zugreifen'  
+      redirect_to notenplans_path, notice: 'Sie dürfen nicht auf diesen Notenplan zugreifen'
     end
   end
 
@@ -37,10 +37,11 @@ class NotenplansController < ApplicationController
   # POST /notenplans
   # POST /notenplans.json
   def create
-    @notenplan = current_user.notenplans.create(notenplan_params)
+    @notenplan = Notenplan.create(notenplan_params)
+    @userNotenplan = UserNotenplan.create(notenplan: @notenplan, user: current_user, admin: true)
 
     respond_to do |format|
-      if @notenplan.valid?
+      if @notenplan.valid? && @userNotenplan.valid?
         format.html { redirect_to new_subject_path(notenplan: @notenplan), notice: 'Notenplan wurde erfolgreich erstellt.' }
         format.json { render :show, status: :created, location: @notenplan }
       else

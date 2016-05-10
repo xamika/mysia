@@ -27,7 +27,12 @@ class UserNotenplansController < ApplicationController
   def create
     user = User.find_by(email: user_notenplan_params[:user_id])
     if (!user.nil?)
-      @user_notenplan = UserNotenplan.find_or_create_by(notenplan_id: user_notenplan_params[:notenplan_id], user_id: user.id)
+      @user_notenplan = UserNotenplan.find_by(notenplan_id: user_notenplan_params[:notenplan_id], user_id: user.id)
+      if @user_notenplan.nil?
+        @user_notenplan = UserNotenplan.create(notenplan_id: user_notenplan_params[:notenplan_id], user_id: user.id, admin: user_notenplan_params[:admin])
+      else
+        @user_notenplan.update(admin: user_notenplan_params[:admin])
+      end
       notenplan = Notenplan.find_by(id: user_notenplan_params[:notenplan_id])
       respond_to do |format|
         if @user_notenplan.save
@@ -75,6 +80,6 @@ class UserNotenplansController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_notenplan_params
-      params.require(:user_notenplan).permit(:user_id, :notenplan_id)
+      params.require(:user_notenplan).permit(:user_id, :notenplan_id, :admin)
     end
 end

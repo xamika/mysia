@@ -17,7 +17,10 @@
   </div>
   <div class="field">
     <%= f.hidden_field :notenplan_id, class: 'form-control', value: @notenplan_id %>
-
+  </div>
+  <div class="form-group">
+    <%= f.label :admin %><br>
+    <%= f.check_box :admin, class: 'form-control' %>
   </div>
   <div class="actions">
     <%= f.submit %>
