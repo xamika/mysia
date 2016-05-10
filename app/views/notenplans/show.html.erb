@@ -28,4 +28,5 @@
 
 <%= link_to 'Bearbeiten', edit_notenplan_path(@notenplan) %> |
 <%= link_to 'Zurück', notenplans_path %> |
-<%= link_to 'Fach hinzufügen', new_subject_path(notenplan: @notenplan) %>
+<%= link_to 'Fach hinzufügen', new_subject_path(notenplan: @notenplan) %> |
+<%= link_to 'User berechtigen', new_user_notenplan_path(notenplan_id: @notenplan) %>

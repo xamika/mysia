@@ -14,6 +14,7 @@ class UserNotenplansController < ApplicationController
 
   # GET /user_notenplans/new
   def new
+    @notenplan_id = params[:notenplan_id]
     @user_notenplan = UserNotenplan.new
   end
 
@@ -24,16 +25,21 @@ class UserNotenplansController < ApplicationController
   # POST /user_notenplans
   # POST /user_notenplans.json
   def create
-    @user_notenplan = UserNotenplan.new(user_notenplan_params)
-
-    respond_to do |format|
-      if @user_notenplan.save
-        format.html { redirect_to @user_notenplan, notice: 'User notenplan was successfully created.' }
-        format.json { render :show, status: :created, location: @user_notenplan }
-      else
-        format.html { render :new }
-        format.json { render json: @user_notenplan.errors, status: :unprocessable_entity }
+    user = User.find_by(email: user_notenplan_params[:user_id])
+    if (!user.nil?)
+      @user_notenplan = UserNotenplan.find_or_create_by(notenplan_id: user_notenplan_params[:notenplan_id], user_id: user.id)
+      notenplan = Notenplan.find_by(id: user_notenplan_params[:notenplan_id])
+      respond_to do |format|
+        if @user_notenplan.save
+          format.html { redirect_to notenplan, notice: 'User notenplan was successfully created.' }
+          format.json { render :show, status: :created, location: @user_notenplan }
+        else
+          format.html { render :new, notenplan_id: user_notenplan_params[:notenplan_id] }
+          format.json { render json: @user_notenplan.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      redirect_to new_user_notenplan_path, notenplan_id: user_notenplan_params[:notenplan_id], notice: 'User wurde nicht gefunden'
     end
   end
 
