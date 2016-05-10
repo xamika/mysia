@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @user_notenplan.user %>
+</p>
+
+<p>
+  <strong>Notenplan:</strong>
+  <%= @user_notenplan.notenplan %>
+</p>
+
+<%= link_to 'Edit', edit_user_notenplan_path(@user_notenplan) %> |
+<%= link_to 'Back', user_notenplans_path %>

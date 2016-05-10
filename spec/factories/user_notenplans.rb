@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :user_notenplan do
-    notenplan nil
-user nil
+    user nil
+notenplan nil
   end
 
 end
