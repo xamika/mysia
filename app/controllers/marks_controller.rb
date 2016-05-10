@@ -58,7 +58,7 @@ class MarksController < ApplicationController
   def destroy
     @mark.destroy
     respond_to do |format|
-      format.html { redirect_to marks_url, notice: 'Note erfolgreich gelöscht.' }
+      format.html { redirect_to notenplans_path, notice: 'Note erfolgreich gelöscht.' }
       format.json { head :no_content }
     end
   end

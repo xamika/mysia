@@ -11,20 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160506133736) do
-
-  create_table "gardes", force: :cascade do |t|
-    t.integer  "notenplan_id"
-    t.integer  "subject_id"
-    t.float    "garde"
-    t.float    "weighting"
-    t.boolean  "shorttest"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-  end
-
-  add_index "gardes", ["notenplan_id"], name: "index_gardes_on_notenplan_id"
-  add_index "gardes", ["subject_id"], name: "index_gardes_on_subject_id"
+ActiveRecord::Schema.define(version: 20160510082800) do
 
   create_table "marks", force: :cascade do |t|
     t.float    "mark"
@@ -54,8 +41,8 @@ ActiveRecord::Schema.define(version: 20160506133736) do
   end
 
   create_table "user_notenplans", force: :cascade do |t|
-    t.integer  "notenplan_id"
     t.integer  "user_id"
+    t.integer  "notenplan_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
