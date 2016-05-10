@@ -11,7 +11,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160506133736) do
+
+ActiveRecord::Schema.define(version: 20160510082800) do
 
   create_table "marks", force: :cascade do |t|
     t.float    "mark"
@@ -41,8 +42,8 @@ ActiveRecord::Schema.define(version: 20160506133736) do
   end
 
   create_table "user_notenplans", force: :cascade do |t|
-    t.integer  "notenplan_id"
     t.integer  "user_id"
+    t.integer  "notenplan_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
