@@ -1,3 +1,4 @@
+<% @admin = admin_access(@notenplan) %>
 <p>
   <strong>Name:</strong>
   <%= @notenplan.name %>
@@ -15,7 +16,7 @@
   <% subject[:marks].each do |mark| %>
     <% if (!mark.mark.nil?) %>
       <%= mark.mark %>
-      <%= link_to 'Löschen', mark, method: :delete, data: { confirm: 'Sind sie sicher?' } %>
+      <%= link_to 'Löschen', mark, method: :delete, data: { confirm: 'Sind sie sicher?' } if @admin %>
       <% total += mark.mark %>
       <% counter += 1 %>
     <% end %>
@@ -23,10 +24,11 @@
   <% if counter > 0 %>
     <b>Durchschnitt: </b><%= total / counter %>
   <% end %>
-  <%= link_to 'Neue Note', new_mark_path(notenplan_id: @notenplan.id, subject_id: subject[:subject].id) %></p>
+  <%= link_to 'Neue Note', new_mark_path(notenplan_id: @notenplan.id, subject_id: subject[:subject].id) if @admin %></p>
 <% end %>
-
-<%= link_to 'Bearbeiten', edit_notenplan_path(@notenplan) %> |
-<%= link_to 'Zurück', notenplans_path %> |
-<%= link_to 'Fach hinzufügen', new_subject_path(notenplan: @notenplan) %> |
-<%= link_to 'User berechtigen', new_user_notenplan_path(notenplan_id: @notenplan) %>
+<% if @admin %>
+  <%= link_to 'Fach hinzufügen', new_subject_path(notenplan: @notenplan) %> |
+  <%= link_to 'User berechtigen', new_user_notenplan_path(notenplan_id: @notenplan) %> |
+  <%= link_to 'Bearbeiten', edit_notenplan_path(@notenplan) %> |
+<% end %>
+<%= link_to 'Zurück', notenplans_path %>

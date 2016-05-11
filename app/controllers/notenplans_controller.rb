@@ -29,7 +29,7 @@ class NotenplansController < ApplicationController
 
   # GET /notenplans/1/edit
   def edit
-    if (!access_allowed)
+    if (!admin_access(@notenplan))
       redirect_to notenplans_path, notice: 'Sie dürfen diesen Notenplan nicht bearbeiten'
     end
   end
@@ -37,7 +37,7 @@ class NotenplansController < ApplicationController
   # POST /notenplans
   # POST /notenplans.json
   def create
-    @notenplan = Notenplan.create(notenplan_params)
+    @notenplan = Notenplan.create(name: notenplan_params['name'], description: notenplan_params['description'], owner: current_user)
     @userNotenplan = UserNotenplan.create(notenplan: @notenplan, user: current_user, admin: true)
 
     respond_to do |format|

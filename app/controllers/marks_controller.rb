@@ -1,11 +1,7 @@
 class MarksController < ApplicationController
   before_action :set_mark, only: [:show, :edit, :update, :destroy]
 
-  # GET /marks
-  # GET /marks.json
-  def index
-    @marks = Mark.all
-  end
+
 
   # GET /marks/1
   # GET /marks/1.json
@@ -14,28 +10,41 @@ class MarksController < ApplicationController
 
   # GET /marks/new
   def new
-    @mark = Mark.new
-    @notenplan_id = params[:notenplan_id]
-    @subject_id = params[:subject_id]
+    if admin_access(Notenplan.find_by(id: params[:notenplan_id]))
+      @mark = Mark.new
+      @notenplan_id = params[:notenplan_id]
+      @subject_id = params[:subject_id]
+    else
+      redirect_to notenplans_path, notice: "Keine Berechtigung"
+    end
   end
 
   # GET /marks/1/edit
   def edit
+    if admin_access(Notenplan.find_by(id: params[:notenplan_id]))
+      @notenplan_id = params[:notenplan_id]
+      @subject_id = params[:subject_id]
+    else
+      redirect_to notenplans_path, notice: "Keine Berechtigung"
+    end
   end
 
   # POST /marks
   # POST /marks.json
   def create
-    @mark = Mark.new(mark_params)
-
-    respond_to do |format|
-      if @mark.save
-        format.html { redirect_to Notenplan.find_by(id: mark_params[:notenplan_id]), notice: 'Note erfolgreich erstellt.' }
-        format.json { render :show, status: :created, location: @mark }
-      else
-        format.html { render :new }
-        format.json { render json: @mark.errors, status: :unprocessable_entity }
+    if admin_access(Notenplan.find_by(id: mark_params[:notenplan_id]))
+      @mark = Mark.new(mark_params)
+      respond_to do |format|
+        if @mark.save
+          format.html { redirect_to Notenplan.find_by(id: mark_params[:notenplan_id]), notice: 'Note erfolgreich erstellt.' }
+          format.json { render :show, status: :created, location: @mark }
+        else
+          format.html { render :new }
+          format.json { render json: @mark.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      redirect_to notenplans_path, notice: "Keine Berechtigung"
     end
   end
 
