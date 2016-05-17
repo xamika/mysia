@@ -1,5 +1,11 @@
 <h1>Notenpläne</h1>
 
+
+<% if @notenplans.count == 0 %>
+  <br>
+  <p>Keine Notenpläne vorhanden.</p>
+<% else %>
+
 <table class="table">
   <thead>
     <tr>
@@ -11,20 +17,21 @@
   </thead>
 
   <tbody>
-    <% @notenplans.each do |notenplan| %>
-      <tr>
-        <td><%= notenplan.name %></td>
-        <td><%= notenplan.description %></td>
-        <td><%= notenplan.owner.email if notenplan.owner.present? %></td>
-        <td><%= link_to 'Anzeigen', notenplan, class: 'btn btn-default' %></td>
-        <td><%= link_to 'Bearbeiten', edit_notenplan_path(notenplan), class: 'btn btn-primary' if  admin_access(notenplan) %></td>
-        <td><%= link_to 'Löschen', notenplan, method: :delete, data: { confirm: 'Sind sie sicher?' }, class: 'btn btn-danger' if admin_access(notenplan) %>
-        </td>
-      </tr>
-    <% end %>
+      <% @notenplans.each do |notenplan| %>
+        <tr>
+          <td><%= notenplan.name %></td>
+          <td><%= notenplan.description %></td>
+          <td><%= notenplan.owner.email if notenplan.owner.present? %></td>
+          <td><%= link_to 'Anzeigen', notenplan, class: 'btn btn-default' %></td>
+          <td><%= link_to 'Bearbeiten', edit_notenplan_path(notenplan), class: 'btn btn-primary' if  admin_access(notenplan) %></td>
+          <td><%= link_to 'Löschen', notenplan, method: :delete, data: { confirm: 'Sind sie sicher?' }, class: 'btn btn-danger' if admin_access(notenplan) %>
+          </td>
+        </tr>
+      <% end %>
   </tbody>
 </table>
+<% end %>
 
 <br>
 
-<%= link_to 'Neuer Notenplan', new_notenplan_path, class: 'btn btn-primary btn-lg center' %>
+<%= link_to 'Neuer Notenplan', new_notenplan_path, class: 'btn btn-primary' %>

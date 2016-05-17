@@ -49,11 +49,9 @@ ActiveRecord::Schema.define(version: 20160511134928) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.boolean  "admin"
-    t.integer  "owner_id"
   end
 
   add_index "user_notenplans", ["notenplan_id"], name: "index_user_notenplans_on_notenplan_id"
-  add_index "user_notenplans", ["owner_id"], name: "index_user_notenplans_on_owner_id"
   add_index "user_notenplans", ["user_id"], name: "index_user_notenplans_on_user_id"
 
   create_table "users", force: :cascade do |t|
