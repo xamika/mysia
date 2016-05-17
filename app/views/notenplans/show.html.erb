@@ -1,34 +1,54 @@
 <% @admin = admin_access(@notenplan) %>
-<p>
-  <strong>Name:</strong>
-  <%= @notenplan.name %>
-</p>
 
-<p>
-  <strong>Beschreibung:</strong>
-  <%= @notenplan.description %>
-</p>
+<h1><%= @notenplan.name %></h1>
+<h4><i><%= @notenplan.description %></i></h4><br>
+
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Fach</th>
+      <th>Noten</th>
+      <th>Durchschnitt</th>
+      <th>Note hinzufügen</th>
+    </tr>
+  </thead>
+
 <% @subjects.each do |subject| %>
-
-  <p>Fach: <%= subject[:subject].name %>
-  <% total = 0.0 %>
-  <% counter = 0 %>
-  <% subject[:marks].each do |mark| %>
-    <% if (!mark.mark.nil?) %>
-      <%= mark.mark %>
-      <%= link_to 'Löschen', mark, method: :delete, data: { confirm: 'Sind sie sicher?' } if @admin %>
-      <% total += mark.mark %>
-      <% counter += 1 %>
-    <% end %>
-  <% end %>
-  <% if counter > 0 %>
-    <b>Durchschnitt: </b><%= total / counter %>
-  <% end %>
-  <%= link_to 'Neue Note', new_mark_path(notenplan_id: @notenplan.id, subject_id: subject[:subject].id) if @admin %></p>
+  <tbody>
+    <tr>
+      <td><%= subject[:subject].name %></td>
+      <% total = 0.0 %>
+      <% counter = 0 %>
+      <td>
+      <% subject[:marks].each do |mark| %>
+        <% if (!mark.mark.nil?) %>
+          <%= mark.mark %>
+          <% if @admin %>
+          <%= link_to mark, method: :delete, data: { confirm: 'Sind sie sicher?' }, class: 'btn btn-danger btn-sm delete_note' do %>
+            <span class="glyphicon glyphicon-trash"></span>
+          <% end %>
+          <% end %>
+          <% total += mark.mark %>
+          <% counter += 1 %>
+        <% end %>
+      <% end %>
+      </td>
+      <td>
+      <% if counter > 0 %>
+        <b><%= total / counter %></b>
+      <% end %>
+      </td>
+      <td><%= link_to 'Neue Note', new_mark_path(notenplan_id: @notenplan.id, subject_id: subject[:subject].id), class: 'btn btn-primary btn-sm' if @admin %></td>
+    </tr>
+  </tbody>
 <% end %>
+</table>
+<br><br>
 <% if @admin %>
-  <%= link_to 'Fach hinzufügen', new_subject_path(notenplan: @notenplan) %> |
-  <%= link_to 'User berechtigen', new_user_notenplan_path(notenplan_id: @notenplan) %> |
-  <%= link_to 'Bearbeiten', edit_notenplan_path(@notenplan) %> |
+  <%= link_to 'Fach hinzufügen', new_subject_path(notenplan: @notenplan), class: 'btn btn-primary' %>
+  <%= link_to 'User berechtigen', new_user_notenplan_path(notenplan_id: @notenplan), class: 'btn btn-primary' %>
+  <%= link_to 'Bearbeiten', edit_notenplan_path(@notenplan), class: 'btn btn-primary' %>
 <% end %>
-<%= link_to 'Zurück', notenplans_path %>
+<br><br>
+<%= link_to 'Zurück', notenplans_path, class: 'btn btn-default' %>
