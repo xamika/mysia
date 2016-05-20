@@ -1,7 +1,8 @@
-FactoryGirl.define do
-  factory :notenplan do
-    name "MyString"
-description "MyString"
-  end
+require 'faker'
 
+FactoryGirl.define do
+  factory :notenplan do |f|
+    f.name Faker::Name.name
+    f.description "description"
+  end
 end
