@@ -1,5 +1,15 @@
 require 'rails_helper'
 
-RSpec.describe Subject, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe Subject do
+
+  before(:each) { @subject = Subject.new(name: "name", number: 1) }
+
+  it "#name returns a string" do
+    expect(@subject.name).to match "name"
+  end
+
+  it "#number returns a integer" do
+    expect(@subject.number).to match 1
+  end
+
 end

@@ -1,12 +1,6 @@
 class UserNotenplansController < ApplicationController
   before_action :set_user_notenplan, only: [:show, :edit, :update, :destroy]
 
-  # GET /user_notenplans
-  # GET /user_notenplans.json
-  def index
-    @user_notenplans = UserNotenplan.all
-  end
-
   # GET /user_notenplans/1
   # GET /user_notenplans/1.json
   def show
