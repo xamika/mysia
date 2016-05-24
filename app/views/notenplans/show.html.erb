@@ -9,6 +9,7 @@
     <tr>
       <th>Fach</th>
       <th>Noten</th>
+      <th>Kurztests</th>
       <th>Durchschnitt</th>
       <% if @admin %>
       <th>Note hinzufügen</th>
@@ -16,29 +17,54 @@
     </tr>
   </thead>
 
+<% subject_counter = 0 %>
+<% total_marks = 0.0 %>
 <% @subjects.each do |subject| %>
   <tbody>
     <tr>
       <td><%= subject[:subject].name %></td>
       <% total = 0.0 %>
       <% counter = 0 %>
+      <% shorttests = [] %>
       <td>
       <% subject[:marks].each do |mark| %>
-        <% if (!mark.mark.nil?) %>
-          <%= mark.mark %>
+        <% if (!mark.mark.nil? && !mark.shorttest) %>
+          <p class="btn" data-toggle="tooltip" data-placement="top" title="Gewichtung: <%= mark.weighting %>"><%= mark.mark %></p>
           <% if @admin %>
-          <%= link_to mark, method: :delete, data: { confirm: 'Sind sie sicher?' }, class: 'btn btn-danger btn-sm delete_note' do %>
-            <span class="glyphicon glyphicon-trash"></span>
+            <%= link_to mark, method: :delete, data: { confirm: 'Sind sie sicher?' }, class: 'btn btn-danger btn-sm delete_note' do %>
+              <span class="glyphicon glyphicon-trash"></span>
+            <% end %>
           <% end %>
-          <% end %>
-          <% total += mark.mark %>
-          <% counter += 1 %>
+          <% total += mark.mark * mark.weighting %>
+          <% counter += mark.weighting %>
+        <% elsif !mark.mark.nil? %>
+          <% shorttests << mark %>
         <% end %>
       <% end %>
       </td>
       <td>
+        <% total_shorttests = 0.0 %>
+        <% shorttest_counter = 0 %>
+        <% shorttests.each do |shorttest| %>
+          <p class="btn" data-toggle="tooltip" data-placement="top" title="Gewichtung: <%= shorttest.weighting %>"><%= shorttest.mark %></p>
+          <% total_shorttests += shorttest.mark * shorttest.weighting %>
+          <% shorttest_counter += shorttest.weighting %>
+          <% if @admin %>
+            <%= link_to shorttest, method: :delete, data: { confirm: 'Sind sie sicher?' }, class: 'btn btn-danger btn-sm delete_note' do %>
+              <span class="glyphicon glyphicon-trash"></span>
+            <% end %>
+          <% end %>
+        <% end %>
+        <% if shorttests.count > 0 %>
+          <% counter += 1 %>
+          <% total += total_shorttests / shorttest_counter %>
+        <% end %>
+      </td>
+      <td>
       <% if counter > 0 %>
-        <b><%= total / counter %></b>
+        <b><%= number_with_precision(total / counter, :precision => 2) %></b>
+        <% total_marks += total / counter %>
+        <% subject_counter += 1 %>
       <% end %>
       </td>
       <% if @admin %>
@@ -49,7 +75,7 @@
 <% end %>
 </table>
 
-<p style="text-align: right; font-size: 16px;">Gesamtdurchschnitt: <b>5.5</b></p>
+<p style="text-align: right; font-size: 16px;">Gesamtdurchschnitt: <b><%= number_with_precision(total_marks / subject_counter, :precision => 2) if subject_counter > 0 %></b></p>
 <br><br>
 <% if @admin %>
   <%= link_to 'Fach hinzufügen', new_subject_path(notenplan: @notenplan), class: 'btn btn-primary' %>
@@ -57,3 +83,9 @@
 <% end %>
 <br><br>
 <%= link_to 'Zurück', notenplans_path, class: 'btn btn-default' %>
+
+<script>
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+</script>
