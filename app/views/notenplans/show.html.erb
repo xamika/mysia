@@ -16,6 +16,8 @@
     </tr>
   </thead>
 
+<% subject_counter = 0 %>
+<% total_marks = 0.0 %>
 <% @subjects.each do |subject| %>
   <tbody>
     <tr>
@@ -38,7 +40,9 @@
       </td>
       <td>
       <% if counter > 0 %>
-        <b><%= total / counter %></b>
+        <b><%= number_with_precision(total / counter, :precision => 2) %></b>
+        <% total_marks += total / counter %>
+        <% subject_counter += 1 %>
       <% end %>
       </td>
       <% if @admin %>
@@ -49,7 +53,7 @@
 <% end %>
 </table>
 
-<p style="text-align: right; font-size: 16px;">Gesamtdurchschnitt: <b>5.5</b></p>
+<p style="text-align: right; font-size: 16px;">Gesamtdurchschnitt: <b><%= number_with_precision(total_marks / subject_counter, :precision => 2) if subject_counter > 0 %></b></p>
 <br><br>
 <% if @admin %>
   <%= link_to 'Fach hinzufügen', new_subject_path(notenplan: @notenplan), class: 'btn btn-primary' %>
