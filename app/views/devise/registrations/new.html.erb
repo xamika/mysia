@@ -3,19 +3,19 @@
     <h3>Registrieren</h3>
     <%= devise_error_messages! %>
     <div class="form-group">
-      <%= f.label :name %>
+      <%= f.label 'Name' %>
       <%= f.text_field :name, :autofocus => true, class: 'form-control' %>
     </div>
     <div class="form-group">
-      <%= f.label :email %>
+      <%= f.label 'Email' %>
       <%= f.email_field :email, class: 'form-control' %>
     </div>
     <div class="form-group">
-      <%= f.label :password %>
+      <%= f.label 'Passwort' %>
       <%= f.password_field :password, class: 'form-control' %>
     </div>
     <div class="form-group">
-      <%= f.label :password_confirmation %>
+      <%= f.label 'Passwort bestätigen' %>
       <%= f.password_field :password_confirmation, class: 'form-control' %>
     </div>
      <%= f.submit 'Registrieren', :class => 'button right' %>
