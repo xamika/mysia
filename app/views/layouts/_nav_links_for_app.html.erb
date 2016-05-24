@@ -1,6 +1,4 @@
 <%# add navigation links to this file %>
 <% if user_signed_in? %>
 <li><%= link_to 'Neuer Notenplan', new_notenplan_path %></li>
-<% else %>
-<a><%= link_to 'Mysia', new_user_session_path, class: 'navbar-brand' %></a>
 <% end %>

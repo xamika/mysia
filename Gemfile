@@ -9,13 +9,6 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'tzinfo-data'
 gem 'select2-rails'
-group :development, :test do
-  gem 'byebug'
-end
-group :development do
-  gem 'web-console', '~> 2.0'
-  gem 'spring'
-end
 gem 'bootstrap-sass'
 gem 'devise'
 gem 'high_voltage'
@@ -29,6 +22,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'rspec-rails'
+  gem 'byebug'
 end
 group :test do
   gem 'capybara'

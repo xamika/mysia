@@ -12,16 +12,16 @@
   <% end %>
 
   <div class="form-group">
-    <%= f.label :mark %><br>
+    <%= f.label 'Note' %><br>
     <%= f.text_field :mark, class: 'form-control' %>
   </div>
   <div class="form-group">
-    <%= f.label :weighting %><br>
+    <%= f.label 'Gewichtung' %><br>
     <%= f.text_field :weighting, class: 'form-control' %>
   </div>
   <div class="form-group">
-    <%= f.label :shorttest %><br>
-    <%= f.check_box :shorttest, class: 'form-control' %>
+    <%= f.label 'Kurztest' %><br>
+    <%= f.check_box :shorttest, class: 'form-control checkbox' %>
   </div>
   <%= f.hidden_field :notenplan_id, class: 'form-control', value: @notenplan_id %>
   <%= f.hidden_field :subject_id, class: 'form-control', value: @subject_id %>
