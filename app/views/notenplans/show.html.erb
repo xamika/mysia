@@ -10,7 +10,9 @@
       <th>Fach</th>
       <th>Noten</th>
       <th>Durchschnitt</th>
+      <% if @admin %>
       <th>Note hinzufügen</th>
+      <% end %>
     </tr>
   </thead>
 
@@ -39,16 +41,19 @@
         <b><%= total / counter %></b>
       <% end %>
       </td>
-      <td><%= link_to 'Neue Note', new_mark_path(notenplan_id: @notenplan.id, subject_id: subject[:subject].id), class: 'btn btn-primary btn-sm' if @admin %></td>
+      <% if @admin %>
+      <td><%= link_to 'Neue Note', new_mark_path(notenplan_id: @notenplan.id, subject_id: subject[:subject].id), class: 'btn btn-primary btn-sm' %></td>
+      <% end %>
     </tr>
   </tbody>
 <% end %>
 </table>
+
+<p style="text-align: right; font-size: 16px;">Gesamtdurchschnitt: <b>5.5</b></p>
 <br><br>
 <% if @admin %>
   <%= link_to 'Fach hinzufügen', new_subject_path(notenplan: @notenplan), class: 'btn btn-primary' %>
   <%= link_to 'User berechtigen', new_user_notenplan_path(notenplan_id: @notenplan), class: 'btn btn-primary' %>
-  <%= link_to 'Bearbeiten', edit_notenplan_path(@notenplan), class: 'btn btn-primary' %>
 <% end %>
 <br><br>
 <%= link_to 'Zurück', notenplans_path, class: 'btn btn-default' %>
