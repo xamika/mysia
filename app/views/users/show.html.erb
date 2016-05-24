@@ -1,3 +1,5 @@
-<h3>Benutzer</h3>
-<p>Name: <%= @user.name if @user.name %></p>
-<p>Email: <%= @user.email if @user.email %></p>
+<h1>Benutzer</h1>
+<p>Name: <b><%= @user.name if @user.name %></b></p>
+<p>Email: <b><%= @user.email if @user.email %></b></p>
+<br><br>
+<%= link_to 'Konto bearbeiten', edit_user_registration_path, class: 'btn btn-primary' %>
