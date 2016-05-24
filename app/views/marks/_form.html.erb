@@ -13,15 +13,15 @@
 
   <div class="form-group">
     <%= f.label 'Note' %><br>
-    <%= f.text_field :mark, class: 'form-control' %>
+    <%= f.text_field :mark, class: 'form-control', required: true %>
   </div>
   <div class="form-group">
     <%= f.label 'Kurztest' %><br>
     <%= f.check_box :shorttest, class: 'form-control checkbox' %>
   </div>
   <div class="form-group">
-    <%= f.label 'Gewichtung' %><br>
-    <%= f.text_field :weighting, class: 'form-control' %>
+    <%= f.label 'Gewichtung (1-100)' %><br>
+    <%= f.text_field :weighting, class: 'form-control', value: 1, required: true %>
   </div>
   <%= f.hidden_field :notenplan_id, class: 'form-control', value: @notenplan_id %>
   <%= f.hidden_field :subject_id, class: 'form-control', value: @subject_id %>

@@ -13,6 +13,7 @@ class MarksController < ApplicationController
     if admin_access(Notenplan.find_by(id: params[:notenplan_id]))
       @mark = Mark.new
       @notenplan_id = params[:notenplan_id]
+      @notenplan = Notenplan.find_by(id: @notenplan_id)
       @subject_id = params[:subject_id]
     else
       redirect_to notenplans_path, notice: "Keine Berechtigung"
@@ -65,9 +66,10 @@ class MarksController < ApplicationController
   # DELETE /marks/1
   # DELETE /marks/1.json
   def destroy
+    notenplan = @mark.notenplan
     @mark.destroy
     respond_to do |format|
-      format.html { redirect_to notenplans_path, notice: 'Note erfolgreich gelöscht.' }
+      format.html { redirect_to notenplan, notice: 'Note erfolgreich gelöscht.' }
       format.json { head :no_content }
     end
   end
